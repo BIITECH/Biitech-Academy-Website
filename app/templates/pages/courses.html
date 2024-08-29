@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+      <!-- About Section Start -->
+      <div
+        class="about-section section section-padding-bottom"
+        data-bg-color="#f5f5f5"
+      >
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12 order-lg-1 order-2">
+              <div class="about-content mt-sm-50 mt-xs-50">
+                <span class="sub-title"
+                  >
+                  Biitech <strong>Academy</strong> .</span
+                >
+                <h2 class="title">Enhance Your<span> Skills, Advance </span>Your Career.</h2>
+                <p>Explore Our Expert-Led IT Courses</p>
+                <a href="{{ url_for('add_user') }}" class="btn btn-primary btn-hover-secondary"
+                  >Enroll now</a
+                >
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 order-lg-1 order-1">
+              <div class="about-image">
+                <div class="about-image-one">
+                  <img
+                    src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png"
+                    alt="about01"
+                  />
+                </div>
+                <!--<div class="about-image-two">
+                  <img
+                    src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458784/biitech-academy/2_mg4vg0.png"
+                    alt="about02"
+                  />
+                </div>-->
+                <div class="shape shape-2 scene">
+                  <span data-depth="4"
+                    ><img
+                      src="static/images/shape-animation/about-shape-1.png"
+                      alt=""
+                  /></span>
+                </div>
+                <div class="shape shape-3 scene">
+                  <span data-depth="4"
+                    ><img
+                      src="static/images/shape-animation/nwesletter-shape-2.png"
+                      alt=""
+                  /></span>
+                </div>
+                <div class="shape shape-4 scene">
+                  <span data-depth="4"
+                    ><img
+                      src="static/images/shape-animation/shape-1.png"
+                      alt=""
+                  /></span>
+                </div>
+                <!-- Animation Shape End -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- About Section End -->
+
+      <!-- Brand Section Start -->
+
+      <!-- Brand Section End -->
+
+      <!-- Course Section Start -->
+        {% include 'grid/courses.html' %}
+      <!-- Course Section End -->
+      
+    {% include 'components/footer.html' %}
+  {% endblock %}
+

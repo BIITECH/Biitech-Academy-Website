@@ -1,0 +1,103 @@
+{% extends 'base.html' %} {% block content %} {% include
+'components/notification.html' %}
+<div class="screen">
+  {% include 'dashboard/sidebar.html' %}
+  <div class="main-dashboard">
+    <div class="top-div">
+      <div class="classes">
+        <h2>Admin Panel</h2>
+        <p>
+          Welcome to the Admin Panel, your central hub for managing all aspects
+          of your platform with ease and efficiency. From user management to
+          content creation, this interface empowers you to streamline operations
+          and deliver an exceptional experience to your users.
+        </p>
+        <div class="admin-frequents">
+          <div class="admin-frequent">
+            <div class="admin-course-content">
+              <h3>Create a New Course</h3>
+              <p>
+                Embark on a journey of knowledge creation and dissemination with
+                our streamlined course creation feature. Craft dynamic and
+                engaging learning experiences tailored to your audience's needs.
+                From defining course objectives to structuring content and
+                setting assessments, our intuitive interface empowers you to
+                design courses that inspire and educate.
+              </p>
+            </div>
+
+            <a href=" {{ url_for ('create_course') }} "
+              ><span>Create Course</span>&nbsp;&nbsp;<span
+                class="material-symbols-outlined"
+                >add_circle</span
+              ></a
+            >
+          </div>
+
+          <div class="admin-frequent">
+            <div class="admin-course-content">
+              <h3>Create a Post</h3>
+              <p>
+                In the ever-evolving landscape of digital communication,
+                creating impactful and engaging posts is essential for
+                connecting with your audience and conveying your message
+                effectively.
+              </p>
+            </div>
+            <a href=" {{ url_for ('create_post') }} "
+              ><span>Create Post</span>&nbsp;&nbsp;<span
+                class="material-symbols-outlined"
+                >add_circle</span
+              ></a
+            >
+          </div>
+
+          <div class="admin-frequent">
+            <div class="admin-course-content">
+              <h3>View All Users</h3>
+              <p>
+                Effortlessly manage your user base with our comprehensive user
+                management tool. Gain insights into user demographics, activity,
+                and engagement to inform your decision-making process. Whether
+                you're tracking enrollment trends or identifying opportunities
+                for targeted communication, our user view feature puts valuable
+                data at your fingertips.
+              </p>
+            </div>
+
+            <a href="{{ url_for ('all_users') }}"
+              ><span>View All Users</span>&nbsp;&nbsp;<span
+                class="material-symbols-outlined"
+                >search</span
+              ></a
+            >
+          </div>
+
+          <div class="admin-frequent">
+            <div class="admin-course-content">
+              <h3>Create and View Admins and Instructors</h3>
+              <p>
+                Efficiently manage your administrative and instructional staff
+                with our dedicated view feature. Gain visibility into roles,
+                permissions, and responsibilities to ensure smooth operations
+                and effective collaboration. Whether you're assigning tasks or
+                monitoring performance, our admin and instructor view provides
+                the insights you need to optimize team productivity and foster a
+                culture of excellence.
+              </p>
+            </div>
+
+            <a href="{{ url_for ('all_users') }}"
+              ><span>Elevate Access</span>&nbsp;&nbsp;<span
+                class="material-symbols-outlined"
+                >admin_panel_settings</span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

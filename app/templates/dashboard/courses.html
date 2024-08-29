@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="screen">
+	{% include 'dashboard/sidebar.html' %}
+	<div class="main-dashboard">
+		<div class="course-registration-header">
+			<h2>Course Registration</h2>
+			<p>Register now and take the first step towards a brighter future with our Course Registration portal. Your journey to success starts here.</p>
+		</div>
+		{% for created_course in created_courses  %}
+			<div class="courses-dashboard-box">
+				{% if current_user.id == 1 %}
+					<div class="hovering-controls">
+						<a href="{{ url_for('edit_created_course', id=created_course.id, title=created_course.course_title) }}"><span class="material-symbols-outlined">edit</span></a>
+						<a href="{{ url_for('delete_course', id=created_course.id, title=created_course.course_title) }}"><span class="material-symbols-outlined">delete</span></a>
+					</div>
+				{% endif %}
+				<div class="courses-dashboard-box-flex">
+					<div class="courses-dashboard-box-img">
+						{% if created_course.course_img %}
+							<img src="https://res.cloudinary.com/biitech-academy/image/upload/v1711986100/{{ created_course.course_img }}"
+							alt="Biitech Academy">
+						{% else %}
+							<img src="https://res.cloudinary.com/biitech-academy/image/upload/v1708529403/biitech-academy/Book_lover-bro_zcbpx6.svg"
+							alt="Biitech Academy">
+						{% endif %}
+					</div>
+
+					<div class="courses-dashboard-box-content">
+						<h2>{{ created_course.course_title }}</h2>
+						<p>{{ created_course.course_description | safe }}</p>
+
+						<div class="courses-dashboard-box-content-circles">
+							
+							<p><span class="material-symbols-outlined">calendar_month</span><span class="courses-log-flex-box-content-icon">{{ created_course.course_duration }}</span></p>
+
+							<p><span class="material-symbols-outlined">cast_for_education</span><span class="courses-log-flex-box-content-icon">{{ created_course.course_lesson }}</span></p>
+
+							<p><span class="material-symbols-outlined">attach_money</span><span class="courses-log-flex-box-content-icon"> {{ created_course.courses_price }} </span></p>
+							
+						</div>
+					</div>
+
+					<div class="instructors-flip">
+						<div class="instructors-flip-img">
+							<img src="https://res.cloudinary.com/biitech-academy/image/upload/v1710895994/biitech-academy/defaultuser_xsw5op_pqmhmg.jpg" alt="Biitech Academy">
+
+							<p><span class="material-symbols-outlined">account_circle</span>&nbsp;&nbsp;<span class="instructors-span">{{ created_course.courses_instructor }}</span></p>
+
+							<p><span class="material-symbols-outlined">cast_for_education</span>&nbsp;&nbsp;<span class="instructors-span">{{ created_course.course_title }}</span></p>
+						</div>
+
+						<div class="instructors-icon">
+							<a href="{{ created_course.course_url }} "><span class="material-symbols-outlined">videocam</span><span>Join Lesson</span></a>
+
+							<div class="instructors-icon-text">
+								<span class="material-symbols-outlined">calendar_month</span><span>{{ created_course.courses_schedule }} Schedule</span>
+							</div>
+						</div>
+
+						<a href="{{ url_for('create_registration', id=created_course.id) }}"> <span>Register for this course</span>&nbsp;&nbsp;<span class="material-symbols-outlined">app_registration</span></a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		
+	</div>
+</div>
+
+{% endblock %}

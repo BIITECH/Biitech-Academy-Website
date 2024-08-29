@@ -1,0 +1,25 @@
+<div class="dashboard-side-bar">
+	<a href=" {{ url_for ('index') }} "><img
+			src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716459198/biitech-academy/Untitled_design-removebg-preview_qrpgff.png" alt="logo"
+			class="dashboard-logo" /></a>
+
+	<div class="dashboard-links-container">
+		<div class="dashboard-link">
+			<a href="{{ url_for ('index') }}"><span class="material-symbols-outlined dashboard-icon">home_app_logo</span><span class="text-icon">Home</span></a>
+
+			<a href=" {{ url_for ('dashboard') }} "><span class="material-symbols-outlined dashboard-icon">dashboard</span><span
+					class="text-icon">Dashboard</span></a>
+
+			{% if current_user.id == 1 %}
+				<a href=" {{ url_for ('admin') }} "><span class="material-symbols-outlined dashboard-icon">admin_panel_settings</span><span class="text-icon">Administrator</span></a>
+			{% endif %}
+
+		</div>
+
+		<div class="dashboard-link-footer">
+			<a href=" {{ url_for ('logout') }} "><span
+					class="material-symbols-outlined dashboard-icon">logout</span><span
+					class="text-icon">Logout</span></a>
+		</div>
+	</div>
+</div>

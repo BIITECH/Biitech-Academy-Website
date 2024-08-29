@@ -1,0 +1,350 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+    <div id="page">
+      <!-- Page Title Section Start -->
+      <div class="page-title-section section section-padding-top-0">
+        <div class="page-breadcrumb position-static">
+          <div class="container">
+            <!--<ul class="breadcrumb">
+              <li><a href="index.html">Home</a></li>
+              <li class="current">Profile</li>
+            </ul>-->
+          </div>
+        </div>
+      </div>
+      <!-- Page Title Section End -->
+
+      <!-- Profile Section Start  -->
+      <div class="profile-section section section-padding-bottom">
+        <div class="container">
+          <div class="row align-items-lg-center">
+            <div class="col-xl-5 col-md-6">
+              <div class="profile-image">
+                {% if current_user.profile_pic %}
+                	<img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ current_user.profile_pic }}" alt="Biitech Academy">
+                {% else %}
+                	<img src="https://res.cloudinary.com/quinn-daisies-platform/image/upload/v1710187990/Quinn_Daisies_Blog/gradient-avatar-illustration_52683-142438_guknqx.jpg" alt="Biitech Academy">
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-xl-6 col-md-6 offset-xl-1">
+              <div class="profile-info">
+                {% if current_user.first_name %}
+                  <h3 class="profile-name">{{ current_user.first_name }}&nbsp;{{ current_user.middle_name }}&nbsp;{{ current_user.last_name }}</h3>
+                {% else %}
+                  <h3 class="profile-name">Update your profile information.</h3>
+                {% endif %}
+                <div class="author-career">{{ current_user.email }}</div>
+                {% if current_user.content == None %}
+                	<p class="author-bio">Hello user, welcome to BIITECH Academy! We are delighted to have you with us. To help us learn more about you, please click the "Update Account" button below.</p>
+                {% else %}
+                	<p class="author-bio">{{ current_user.content[:450] | safe }}</p>
+                {% endif %}
+
+                <h5 class="profile-contact-title">Contact</h5>
+                <span class="contact-info-text">
+                	{% if current_user.contact == None %}
+                		<span class="phone">Phone number: <strong>Not yet given</strong></span>
+                	{% else %}
+                		<span class="phone">Phone number: <strong>{{ current_user.contact }}</strong></span>
+                	{% endif %}
+                  <br />
+                  <span class="email"
+                    >Email:
+                    <strong>{{ current_user.email }}</strong></span
+                  >
+                </span>
+                <ul class="author-social-networks">
+                  <li class="item">
+                    <a
+                      href="{{ current_user.facebook_account }}"
+                      target="_blank"
+                      class="social-link"
+                    >
+                      <i class="fab fa-facebook-f social-link-icon"></i>
+                    </a>
+                  </li>
+                  <li class="item">
+                    <a
+                      href="{{ current_user.linkedin_account }}"
+                      target="_blank"
+                      class="social-link"
+                    >
+                      <i class="fab fa-linkedin social-link-icon"></i>
+                    </a>
+                  </li>
+                </ul>
+                <div class="custom-account-flex">
+                	<a href="{{ url_for('update', id=current_user.id, email=current_user.email|replace(' ', '-')) }}" class="btn btn-primary btn-hover-secondary btn-width-100">Update account</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a href="{{ url_for('delete', id=current_user.id, email=current_user.email|replace(' ', '-')) }}" class="btn btn-danger btn-hover-secondary btn-width-100">Delete account</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Profile Section End  -->
+      {% if current_user.first_name %}
+        <!-- Learn Press Profile Section Start -->
+        <div class="learn-press-profile-section section section-padding-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="learn-press-profile-nav">
+                  <ul class="nav">
+                    <li><a class="active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
+                    <li><a data-bs-toggle="tab" href="#courses">Courses</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="tab-content lp-profile-content">
+                  {% set user_registered_courses = [] %}
+                    {% for created_course in created_courses %}
+                      {% for registration in created_course.course_foreignkey %}
+                        {% if current_user.id == registration.user_id %}
+                          {% set user_registered_courses = user_registered_courses.append(created_course) %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+
+                  <div id="dashboard" class="learn-press-profile-dashboard tab-pane fade show active">
+                    {% if user_registered_courses %}
+                      <div class="profile-progress-status">
+                        <div class="row">
+
+                          <div class="col-md-3 col-sm-6">
+                            <div class="status-box warning courses-in-progress">
+                              <div class="status-number">00</div>
+                              <h6 class="status-text">Courses Completed</h6>
+                            </div>
+                          </div>
+                          <div class="col-md-3 col-sm-6">
+                            <div class="status-box success courses-completed">
+                              {% set user_registered_courses = [] %}
+                                {% for created_course in created_courses %}
+                                  {% for registration in created_course.course_foreignkey %}
+                                    {% if current_user.id == registration.user_id %}
+                                      {% set _ = user_registered_courses.append(created_course) %}
+                                    {% endif %}
+                                  {% endfor %}
+                                {% endfor %}
+
+                                {% set active_courses = user_registered_courses|length %}
+
+                                {% if active_courses > 0 %}
+                                  <div class="status-number">{{ '%02d'|format(active_courses) }}</div>
+                                  <h6 class="status-text">Courses In Progress</h6>
+                                {% else %}
+                                  <div class="status-number">00</div>
+                                  <h6 class="status-text">Courses In Progress</h6>
+                                {% endif %}
+                            </div>
+                          </div>
+                          <div class="col-md-3 col-sm-6">
+                            <div class="status-box info quizzes-completed">
+                              <div class="status-number">00</div>
+                              <h6 class="status-text">Failed Courses</h6>
+                            </div>
+                          </div>
+                          <div class="col-md-3 col-sm-6">
+                            <div class="status-box error courses-completed">
+                              {% set available_courses = created_courses.all() %}
+                              {% set courses_number = available_courses|length %}
+                              <div class="status-number">{{ courses_number }}</div>
+                              <h6 class="status-text">Available Courses</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="profile-courses-progress">
+                        <h3 class="title">Courses progress</h3>
+                        <div class="maxcoach-progress style-01">
+                          {% set user_registered_courses = [] %}
+                            {% for created_course in created_courses %}
+                              {% for registration in created_course.course_foreignkey %}
+                                {% if current_user.id == registration.user_id %}
+                                  {% set user_registered_courses = user_registered_courses.append(created_course) %}
+
+                                {% endif %}
+                              {% endfor %}
+                            {% endfor %}
+
+                            {% if user_registered_courses %}
+                              {% for created_course in user_registered_courses %}
+                                <!-- Start Single Progress Charts -->
+                                <div class="progress-charts mt-50 wow move-up">
+                                  <h6 class="title">
+                                    {{ created_course.course_title }} Course
+                                  </h6>
+                                  <div class="progress">
+                                    <div
+                                      class="progress-bar wow fadeInLeft"
+                                      data-wow-duration="0.5s"
+                                      data-wow-delay=".3s"
+                                      role="progressbar"
+                                      style="width: 33%"
+                                      aria-valuenow="33"
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    >
+                                      <span class="percent-label">33.3%</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- End Single Progress Charts -->
+                              {% endfor %}
+                            {% endif %}
+                        </div>
+                      </div>
+                    {% else %}
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="learn-press-message success">
+                            <i class="fa"></i>No course started yet!
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  
+                  <div id="courses" class="profile-content-courses tab-pane fade">
+                    <div class="tab-content">
+                      <div id="owned" class="tab-pane fade show active">
+                        <div class="learn-press-subtab-content">
+                          <ul class="lp-sub-menu nav justify-content-center">
+                            <li>
+                              <a
+                                class="active show"
+                                data-bs-toggle="tab"
+                                href="#all"
+                                >All Courses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a
+                              >
+                            </li>
+                            <li>
+                              <a data-bs-toggle="tab" href="#publish">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registered Courses</a>
+                            </li>
+                          </ul>
+
+                          <div class="tab-content">
+                            <div id="all" class="tab-pane fade show active">
+                              <!-- Courses Wrapper Start -->
+                              <div
+                                class="row row-cols-lg-3 row-cols-md-2 row-cols-1 max-mb-n30"
+                              >
+                                <!-- Course Start -->
+                                {% for created_course in created_courses  %}
+                                  <div class="col max-mb-30" data-aos="fade-up">
+                                  <div class="course">
+                                    <div class="thumbnail">
+                                      {% if created_course.course_img %}
+                                        <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}" class="image"><img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ created_course.course_img }}" alt="Biitech Academy"/></a>
+                                      {% endif %}
+                                    </div>
+                                    <div class="info">
+                                      <!--<span class="price"
+                                        >{{ created_course.courses_price }}<span>.00</span></span
+                                      >-->
+                                      <h3 class="title">
+                                        <a
+                                          href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}"
+                                          >{{ created_course.course_title }}</a
+                                        >
+                                      </h3>
+
+                                      <div class="desc">
+                                        <p>{{ created_course.course_description[0:150] | safe }}...</p>
+                                      </div>
+
+                                      <!--<ul class="meta">
+                                        <li>
+                                          <i class="fas fa-file-alt"></i>{{ created_course.course_lesson }} Lessons
+                                        </li>
+                                        <li>
+                                          <i class="fas fa-user-alt"></i>{{ created_course.course_duration }} Duration
+                                        </li>
+                                      </ul>-->
+                                    </div>
+                                  </div>
+                                  </div>
+                                {% endfor %}
+                                <!-- Course End -->
+                              </div>
+                              <!-- Courses Wrapper End -->
+                            </div>
+                            <div id="publish" class="tab-pane fade">
+                              <!-- Courses Wrapper Start -->
+                              <div
+                                class="row row-cols-lg-3 row-cols-md-2 row-cols-1 max-mb-n30"
+                              >
+                                
+                                <!-- Course Start -->
+                                {% set user_registered_courses = [] %}
+                                  {% for created_course in created_courses %}
+                                    {% for registration in created_course.course_foreignkey %}
+                                      {% if current_user.id == registration.user_id %}
+                                        {% set user_registered_courses = user_registered_courses.append(created_course) %}
+
+                                      {% endif %}
+                                    {% endfor %}
+                                  {% endfor %}
+
+                                {% if user_registered_courses %}
+                                  {% for created_course in user_registered_courses %}
+                                    <div class="col max-mb-30" data-aos="fade-up">
+                                      <div class="course">
+                                        <div class="thumbnail">
+                                          {% if created_course.course_img %}
+                                            <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}" class="image"><img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ created_course.course_img }}" alt="Biitech Academy"/></a>
+                                          {% endif %}
+                                        </div>
+
+                                        <div class="info">
+                                          <!--<span class="price">{{ created_course.courses_price }}<span>.00</span></span>-->
+                                          <h3 class="title"><a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}">{{ created_course.course_title }}</a></h3>
+                                          <div class="desc">
+                                            <p>{{ created_course.course_description[0:150] | safe }}...</p>
+                                          </div>
+
+                                          <!--<ul class="meta">
+                                            <li><i class="fas fa-file-alt"></i>{{ created_course.course_lesson }} Lessons</li>
+                                            <li><i class="fas fa-user-alt"></i>{{ created_course.course_duration }} Duration</li>
+                                          </ul>-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  {% endfor %}
+                                {% else %}
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="learn-press-message success">
+                                        <i class="fa"></i>No courses!
+                                      </div>
+                                    </div>
+                                  </div>
+                                {% endif %}
+                                  <!-- Course End -->
+                              </div>
+                              <!-- Courses Wrapper End -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Learn Press Profile Section End -->
+      {% endif %}
+    </div>
+  {% include 'components/footer.html' %}
+{% endblock %}

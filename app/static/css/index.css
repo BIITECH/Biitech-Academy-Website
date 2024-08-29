@@ -1,0 +1,38 @@
+.header-logo a .logo-custom-img {
+	width: 260px;
+	height: auto;
+	padding: 0 0 0 0;
+	object-fit: cover;
+}
+
+.intro1-course .image-size {
+	width: 100%;
+	max-width: 186px;
+	height: auto;
+	object-fit: scale-down;
+}
+
+.course-2 .thumbnail .image .image-course-section {
+	width: 100%;
+	max-width: 370px;
+	height: auto;
+	object-fit: scale-down;
+}
+
+.teacher-quote .index-image {
+	width: 100%;
+	max-width: 270px;
+	height: auto;
+	object-fit: scale-down;
+}
+
+.custom-account-flex {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
+	width: 100%;
+	height: auto;
+	padding: 20px 0;
+}

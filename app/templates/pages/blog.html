@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %} {% include
+'components/navbar.html' %} {% include 'components/notification.html' %}
+<!-- About Section Start -->
+<div
+  class="about-section section section-padding-bottom"
+  data-bg-color="#f5f5f5"
+></div>
+<!-- About Section End -->
+
+<!-- Course Section Start -->
+{% include 'grid/posts.html' %}
+<!-- Course Section End -->
+
+{% include 'components/footer.html' %} {% endblock %}

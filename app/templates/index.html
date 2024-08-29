@@ -1,0 +1,274 @@
+{% extends 'base.html' %} {% block content %} {% include
+'components/navbar.html' %} {% include 'components/notification.html' %}
+<div id="page" class="section">
+  <!-- Slider/Intro Section Start -->
+  <div
+    class="intro1-section section section-fluid"
+    data-bg-image="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716549461/biitech-academy/2150690154_ezuinr.jpg"
+  >
+    <div class="container">
+      <div class="row row-cols-md-2 row-cols-1 max-mb-n30">
+        <!-- Intro One Content Start -->
+        <div class="col align-self-center max-mb-30" data-aos="fade-up">
+          <div class="intro1-content text-center text-md-start">
+            <span class="sub-title">BIITECH Academy</span>
+            <h2 class="title">
+              Premier Private<br />Technology Career School.
+            </h2>
+            <div class="desc">
+              <p>
+                Accredited Programs | Expert Instructors | Career Supportals.
+              </p>
+            </div>
+            <a
+              href="{{ url_for ('add_user') }}"
+              class="btn btn-primary btn-hover-secondary"
+              >Enroll now</a
+            >
+          </div>
+        </div>
+        <!-- Intro One Content End -->
+      </div>
+    </div>
+
+    <!-- Section Bottom Shape Start -->
+    <div class="section-bottom-shape">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        height="100"
+      >
+        <path d="M 0 0 L100 0 Q 50 200 0 0"></path>
+      </svg>
+    </div>
+    <!-- Section Bottom Shape End -->
+  </div>
+  <!-- Slider/Intro Section End -->
+
+  <!-- Feature Section Start -->
+  <div class="section">
+    <div class="container">
+      <!-- Section Title Start -->
+      <div class="section-title text-center" data-aos="fade-up">
+        <span class="sub-title">Education for everyone</span>
+        <h2 class="title">
+          Specialized <span>training programs</span> to meet IT demands.
+        </h2>
+      </div>
+      <!-- Section Title End -->
+
+      <!-- Feature Wrapper Start -->
+      <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1 g-0">
+        <!-- Feature Start (Icon Box) -->
+        <div class="col" data-aos="fade-up">
+          <a
+            href="{{ url_for('programs') }}"
+            class="icon-box text-center"
+            data-vivus-hover
+          >
+            <div class="icon">
+              <img
+              style=" filter: invert(100%); "
+                class="svgInject"
+                src="static/images/svg/linea/circuit.png"
+                alt=""
+              />
+            </div>
+            <div class="content">
+              <h3 class="title">
+                TechXplore: Coding Bootcamp for K-12 Students
+              </h3>
+              <div class="desc"></div>
+            </div>
+          </a>
+        </div>
+        <!-- Feature Start (Icon Box) -->
+
+        <!-- Feature Start (Icon Box) -->
+        <div class="col" data-aos="fade-up">
+          <a
+            href="{{ url_for('programs') }}"
+            class="icon-box text-center"
+            data-vivus-hover
+          >
+            <div class="icon">
+              <img
+              style=" filter: invert(100%); "
+                class="svgInject"
+                src="static/images/svg/linea/iot.png"
+                alt=""
+              />
+            </div>
+            <div class="content">
+              <h3 class="title">Youth Apprenticeship Program</h3>
+              <div class="desc"></div>
+            </div>
+          </a>
+        </div>
+        <!-- Feature Start (Icon Box) -->
+
+        <!-- Feature Start (Icon Box) -->
+        <div class="col" data-aos="fade-up">
+          <a
+            href="{{ url_for('programs') }}"
+            class="icon-box text-center"
+            data-vivus-hover
+          >
+            <div class="icon">
+              <img
+              style=" filter: invert(100%); "
+                class="svgInject"
+                src="static/images/svg/linea/Network_Care.png"
+                alt=""
+              />
+            </div>
+            <div class="content">
+              <h3 class="title">Digital Literacy Bootcamp</h3>
+              <div class="desc"></div>
+            </div>
+          </a>
+        </div>
+        <!-- Feature Start (Icon Box) -->
+
+        <!-- Feature Start (Icon Box) -->
+        <div class="col" data-aos="fade-up">
+          <a
+            href="{{ url_for('programs') }}"
+            class="icon-box text-center"
+            data-vivus-hover
+          >
+            <div class="icon">
+              <img
+              style=" filter: invert(100%); "
+                class="svgInject"
+                src="static/images/svg/linea/cyber-security_3.png"
+                alt=""
+              />
+            </div>
+            <div class="content">
+              <h3 class="title">Cyber Literacy Program</h3>
+              <div class="desc">
+                <!--<p>
+                        Learn from anywhere in the world on desktop, tablet or
+                        mobile phone with an Internet connection.
+                      </p>-->
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Feature Start (Icon Box) -->
+      </div>
+      <!-- Feature Wrapper End -->
+    </div>
+  </div>
+  <!-- Feature Section End -->
+
+  <!-- Course Section Start -->
+  <div class="section section-padding">
+    <div class="container">
+      <!-- Section Title Start -->
+      <div class="section-title text-center" data-aos="fade-up">
+        <span class="sub-title">Learn at your Pace</span>
+        <h2 class="title">EMBRACE YOUR LEARNING JOURNEY</h2>
+      </div>
+      <!-- Section Title End -->
+
+      <!-- Course Wrapper Start -->
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 max-mb-n30">
+        <!-- Course Start -->
+        {% for course in courses[0:3] %}
+        <div class="col max-mb-30" data-aos="fade-up">
+          <div class="course-2">
+            <div class="thumbnail">
+              <a
+                href="{{ url_for ('course', id=course.id, title=course.title) }}"
+                class="image"
+                ><img
+                  src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ course.course_img }}"
+                  alt="Course Image"
+              /></a>
+            </div>
+            <div class="info">
+              <!--<span class="price">{{ course.courses_price }}</span>
+                    <span class="date">Schedule: {{ course.courses_schedule }}</span>-->
+              <h3 class="title">
+                <a href="course-details-sticky-feature-bar.html"
+                  >{{ course.course_title }}</a
+                >
+              </h3>
+              <div class="desc">
+                <p>{{ course.course_description[0:100] | safe }}...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Course End -->
+      </div>
+      <!-- Course Wrapper End -->
+
+      <div class="row max-mt-50">
+        <div class="col text-center">
+          <a
+            href="{{ url_for ('courses') }}"
+            class="btn btn-primary btn-hover-secondary"
+          >
+            View all courses <i class="fas fa-arrow-right ms-3"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Course Section End -->
+
+  <!-- Brand Section Start -->
+  {% include 'components/banner.html' %}
+  <!-- Brand Section End -->
+
+  <!-- Newsletter Popup Start -->
+  <!--<div id="max-popup" class="max-popup-section section">
+              <div class="max-popup-dialog animated fadeInUp">
+                  <button class="max-popup-close"><i class="fal fa-times"></i></button>
+                  <div class="max-popup-dialog-inner">
+                      <div class="row">
+                          <div class="col-md-5 col-12 d-none d-md-block">
+                              <div class="freecourse-popup-image">
+                                  <img src="static/images/others/popup-free-course.png" alt="">
+                              </div>
+                          </div>
+                          <div class="col-md-7 col-12 align-self-center">
+                              <div class="freecourse-popup-content">
+                                  <h6 class="sub-title">Get Our Course free</h6>
+                                  <h2 class="title">Awesome for Website</h2>
+                                  <div class="freecourse-download-form">
+                                      <form action="#">
+                                          <div class="row max-mb-n20">
+                                              <div class="col-12 max-mb-20">
+                                                  <input type="email" placeholder="Your E-mail">
+                                              </div>
+                                              <div class="col-12 max-mb-20">
+                                                  <button class="btn btn-primary btn-hover-secondary w-100">Download now</button>
+                                              </div>
+                                              <div class="col-12 max-mb-20">
+                                                  <small class="form-text text-center"><i class="fal fa-lock-alt mr-2"></i> Your infomation will never be shared with any third party</small>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>-->
+  <!-- Newsletter Popup End -->
+
+  <!-- Scroll Top Start -->
+  <a href="#" class="scroll-top" id="scroll-top">
+    <i class="arrow-top fas fa-arrow-up"></i>
+    <i class="arrow-bottom fas fa-arrow-up"></i>
+  </a>
+  <!-- Scroll Top End -->
+</div>
+{% include 'components/footer.html' %} {% endblock %}

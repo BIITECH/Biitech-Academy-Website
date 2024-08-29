@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+      <div class="form-container">
+        <img class="login-form-image" src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716899827/biitech-academy/medium-shot-people-working-office-together_23-2149337277_mdhxto.jpg" alt="Renaissance Website Image">
+
+        <div class="form-container-background">
+          <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="login-form-header">
+              <h2>Student Login</h2>
+              <p>Access your account to manage your courses and profile.</p>
+            </div>
+
+            <div class="login-input-box">
+              <label>EMAIL</label>
+              <input type="text" name="email" placeholder="Your Email Address">
+            </div>
+
+            <div class="login-input-box">
+              <label>PASSWORD</label>
+              <input type="password" name="password" placeholder="********************">
+            </div>
+            <div class="login-form-footer">
+              <a href="{{ url_for('add_user') }}">Click here to enroll</a>
+            </div>
+            
+            <div class="login-footer-btn-flex">
+              <button class="form-button-container button" type="submit" name="submit">
+                <span>LOGIN ACCOUNT</span>
+                <img class="form-button-arrow" src="https://res.cloudinary.com/quinn-daisies/image/upload/v1716568463/Renaissance/Right_Arrow_1_uvdf61.png" alt="Renaissance Website Image">
+              </button>
+              <a href="{{ url_for('google_login') }}" class="form-button-container button">
+                <span>CONTINUE WITH GOOGLE</span>
+                <img class="button-arrow" src="https://res.cloudinary.com/quinn-daisies/image/upload/v1716814043/Renaissance/Google_dtacz8.png" alt="Renaissance Website Image">
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    {% include 'components/footer.html' %}
+  {% endblock %}

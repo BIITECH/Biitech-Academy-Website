@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:type" content="homepage" />
+    <meta property="type" content="homepage" />
+
+    <title>{{ title_tag }}</title>
+
+    <meta name="robots" content="noindex, follow" />
+    <!-- Links -->
+    <link rel="canonical" href="{{ url_link }}" />
+    <link rel="og:canonical" href="{{ url_link }}" />
+    <link rel="image_src"
+      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+    <link rel="shortcut icon" type="image/png"
+      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta property="og:image"
+      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+
+    <link rel="icon" type="image/png"
+      href="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+
+    <meta property="twitter:image"
+      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <link rel="icon"
+      href="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png" />
+    <meta name="og:description" content="{{ meta_description }}" />
+    <meta name="description" content="{{ meta_description }}" />
+    <meta name="og:keywords" content="{{ keyword }}" />
+    <meta name="keywords" content="{{ keyword }}" />
+    <meta name="rating" content="General" />
+    <meta content="all" name="Googlebot-Image" />
+    <meta content="all" name="Slurp" />
+    <meta content="all" name="Scooter" />
+    <meta content="ALL" name="WEBCRAWLERS" />
+    <meta name="revisit-ALL" content="1 days" />
+    <meta name="robots" content="ALL, index, follow" />
+    <meta name="author" content="Ebire Folayemi Michael" />
+    <meta name="revised" content="{{ revised }}" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458773/biitech-academy/1-removebg-preview_wrpkvg.png"
+    />
+
+    <!-- CSS
+  ============================================ -->
+
+    <!-- Vendor CSS (Bootstrap & Icon Font) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.min.css') }}" />
+
+    <!-- Plugins CSS (All Plugins Files) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/aos.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/animate.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/plugins/jquery.animatedheadline.css') }}"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/justifiedGallery.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/swiper.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/nice-select.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/ion.rangeSlider.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins/magnific-popup.css') }}" />
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
+
+  <body>
+    {% block content %}
+
+    {% endblock %}
+    <!--<script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.4/libs/oversea/index.js"></script>
+    <script>
+      new CozeWebSDK.WebChatClient({
+        config: {
+          bot_id: '7387890476667600902',
+        },
+        componentProps: {
+          title: 'The Immigration App',
+        },
+      });
+    </script>-->
+
+    <script src="{{ url_for ('static', filename='js/vendor/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/vendor/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Plugins JS -->
+    <script src="{{ url_for ('static', filename='js/plugins/aos.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/countdown.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/ion.rangeSlider.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/parallax.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/Jarallax.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.justifiedGallery.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/rellax.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/waypoints.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.animatedheadline.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.counterup.min.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.magnific-popup.min.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/jquery.selectric.min.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/sticky-sidebar.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/svg-inject.min.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/swiper.min.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/plugins/vivus.min.js' ) }}"></script>
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script> -->
+
+    <!-- Main Activation JS -->
+    <script src="{{ url_for ('static', filename='js/main.js' ) }}"></script>
+    <script src="{{ url_for ('static', filename='js/app.js' ) }}"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", notificationClose);
+    </script>
+  </body>
+</html>

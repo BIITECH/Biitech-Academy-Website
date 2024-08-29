@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show popup-notification" role="alert">
+  <div class="notification-header">
+    <div class="notification-header-img">
+      <img
+        src="https://res.cloudinary.com/quinn-daisies-platform/image/upload/v1711065684/Quinn_Daisies_Blog/bell_ktw9xf_scrpqe.png"
+        alt="Quinn Daisies Blog">
+    </div>
+
+    <div type="button" class="btn-close notification-btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
+  </div>
+
+  <div class="notification-message">
+    <h1>Notification</h1>
+    <div class="notification-text">{{ message }}</div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="screen">
+	{% include 'dashboard-sidebar.html' %}
+	<div class="main-dashboard">
+		<form class="update-frame"
+			method="POST" type="file"
+            name="file" action="" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+
+			<div class="form-content-container-text">
+				<h3>Admin Panel Course Creation</h3>
+				<p>The Admin Panel Course Creation tool. Here, you wield the power to shape the learning experience for your users with precision and finesse. Our intuitive interface empowers you to craft courses that inspire, educate, and transform.</p>
+
+				<h5>Edit Created Course</h5>
+				<p>Welcome to the edit page for your created course. Here, you have the opportunity to modify the details of your course to ensure it meets your standards and requirements. Take your time to make the necessary adjustments and enhancements to provide the best learning experience for your students.</p>
+			</div>
+
+			<div class="form-flex-side-bar">
+				<div class="form-input">
+					<div class="form-input-grid">
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">title</span>
+							<input type="text" name="course_title" value="{{ form.course_title.data }}" required >
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">timer</span>
+							<input type="text" name="course_duration" value="{{ form.course_duration.data }}" required>
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">cast_for_education</span>
+							<input type="text" name="course_lesson" value="{{ form.course_lesson.data }}" required>
+						</div>
+
+					</div>
+
+					<div class="form-content-container">
+						{{ form.course_description(class="form-control", rows="10") }}
+
+						<div class="update-frame-content">
+							<div class="profile-user-information">
+								<label>Add a course introductory video</label>
+								<div class="form-user-box">
+									<span class="material-symbols-outlined">movie</span>
+									<input type="type" name="course_video" value="{{ form.course_video.data }}" required>
+								</div>
+
+								<label>Course Price</label>
+								<div class="form-user-box">
+									<span class="material-symbols-outlined">attach_money</span>
+									<input type="type" name="courses_price" value="{{ form.courses_price.data }}" required>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-input-grid">
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">detector_status</span>
+							<input type="text" name="courses_instructor" value="{{ form.courses_instructor.data }}" required>
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">link</span>
+							<input type="text" name="courses_url" value="{{ form.courses_url.data }}" required>
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">schedule</span>
+							<input type="time" name="courses_schedule" value="{{ form.courses_schedule.data }}" required>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" name="submit">
+				<span>Create Course</span>
+				<span class="material-symbols-outlined">chevron_right</span>
+			</button>
+
+		</form>
+		{{ ckeditor.load() }} {{ ckeditor.config(name='course_description') }}
+	</div>
+</div>
+{% endblock %}

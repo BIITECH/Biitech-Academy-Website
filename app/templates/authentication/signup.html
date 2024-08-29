@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+
+    {% if 'biitech-academy/course-details/' in request.url_rule.rule %}
+      <div class="notification-popup">
+        <div class="notification-popup-container">
+            <div class="notification-image-container">
+                <img class="notification-background-image" src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716458784/biitech-academy/2_mg4vg0.png" alt="Renaissance Website Image">
+
+                <div class="notification-content">
+                    <div class="notification-content-flex">
+                        <h2>Notification</h2>
+                        <div class="popup-notification-close">
+                            <img src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1717434996/biitech-academy/Close_Window_1_lwzsmp.png" alt="Renaissance Website Image">
+                        </div>
+                    </div>
+
+                    <p>You have to be enrolled to register for a course</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="form-container">
+      <img class="login-form-image" src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716902757/biitech-academy/front-view-thoughtful-woman-working-with-laptop-library_74855-4266_mn6di5.jpg" alt="Renaissance Website Image">
+
+      <div class="form-container-background">
+        <form method="POST">
+          {{ form.hidden_tag() }}
+            <div class="login-form-header">
+              <h2>Start your IT career journey with Us</h2>
+              <p>Join Biitech Academy and start your journey in BIITECH academy today.</p>
+            </div>
+
+            <div class="form-container-flex-two">
+              <div class="login-input-box">
+                <label>FIRST NAME</label>
+                <input type="text" name="first_name" placeholder="Enter Your First Name" required>
+              </div>
+
+              <div class="login-input-box">
+                <label>LAST NAME</label>
+                <input type="text" name="last_name" placeholder="Enter Your Last Name" required>
+              </div>
+            </div>
+
+            <div class="form-container-flex-two">
+              <div class="login-input-box">
+                <label>MIDDLE NAME</label>
+                <input type="text" name="middle_name" placeholder="Enter Your Middle Name" required>
+              </div>
+
+              <div class="login-input-box">
+                <label>EMAIL</label>
+                <input type="text" name="email" placeholder="Your Email Address" required>
+              </div>
+            </div>
+            
+            <div class="login-input-box">
+              <label>CONTACT</label>
+              <input type="number" name="contact" placeholder="Your Contact Number" required>
+            </div>
+
+            <div class="login-input-box">
+              <label>PASSWORD</label>
+              <input type="password" name="password_hash" placeholder="********************" required>
+            </div>
+
+            <div class="login-input-box">
+              <label>COMFIRM PASSWORD</label>
+              <input type="password" name="password_hash2" placeholder="********************" required>
+            </div>
+
+            <!--<div class="login-form-footer">
+              <a href="{{ url_for('login') }}">Already enrolled? Log in here</a>
+            </div>-->
+            
+            <div class="login-footer-btn-flex">
+              <button class="form-button-container button" type="submit" name="submit">
+                <span>ENROLL NOW</span>
+                <img class="form-button-arrow" src="https://res.cloudinary.com/quinn-daisies/image/upload/v1716568463/Renaissance/Right_Arrow_1_uvdf61.png" alt="Renaissance Website Image">
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+{% include 'components/footer.html' %}
+  {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'components/notification.html' %}
+<div class="screen">
+	{% include 'dashboard/sidebar.html' %}
+	<div class="main-dashboard">
+		<div class="top-div">
+			<div class="classes">
+				<h2>Admin Panel</h2>
+				<h5>Manage User Accounts</h5>
+				<p>Welcome to the Admin Panel. This central hub empowers you to oversee and manage user accounts efficiently. From here, you can view, edit, and manage all registered users, ensuring a seamless experience for everyone involved.</p>
+
+				<div class="admin-user-frequents">
+
+					{% for our_user in our_users %}
+						<div class="admin-panel-control-box">
+							<div class="admin-users">
+								<div class="admin-users-img">
+									{% if our_user.profile_pic %}
+										<img src="https://res.cloudinary.com/biitech-academy/image/upload/{{ our_user.profile_pic }}" alt="Biitech Academy">
+									{% else %}
+										<img src="https://res.cloudinary.com/biitech-academy/image/upload/v1710895994/biitech-academy/defaultuser_xsw5op_pqmhmg.jpg"
+										alt="Biitech Academy">
+									{% endif %}
+								</div>
+								<div class="admin-user-content">
+									<h3>{{ our_user.last_name }} {{ our_user.first_name }} {{ our_user.middle_name }}</h3>
+									<p>{{ our_user.content | safe }}</p>
+									<p>{{ our_user.email }}</p>
+								</div>
+							</div>
+
+							<div class="admin-user-control-button">
+								
+								<a href="{{ url_for ('admin_update', id=our_user.id, name=our_user.first_name) }}"><span class="material-symbols-outlined">edit</span></a>
+
+								<a href="{{ url_for ('delete', id=our_user.id) }}"><span class="material-symbols-outlined">delete</span></a>
+
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

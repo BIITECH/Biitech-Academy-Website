@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+        <br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;
+        <!-- Course Details Section Start -->
+        <div class="section">
+          <div class="container">
+            <div class="row max-mb-n50">
+              <div class="col-lg-8 col-12 order-lg-1 max-mb-50">
+                <!-- Course Details Wrapper Start -->
+                <div class="course-details-wrapper">
+                  <div class="course-nav-tab">
+                    <ul class="nav">
+                      <li>
+                        <a class="active" data-bs-toggle="tab" href="#overview"
+                          >Overview</a
+                        >
+                      </li>
+                      <li>
+                        <a data-bs-toggle="tab" href="#instructor">Instructor</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="tab-content">
+                    <div id="overview" class="tab-pane fade show active">
+                      <div class="course-overview">
+                        <h3 class="title">{{ course.course_title }}</h3>
+
+                        <p>{{ course.course_description | safe }}</p>
+
+                        <div class="overview-course-video">
+                          <iframe
+                            title="jQuery Tutorial #1 - jQuery Tutorial for Beginners"
+                            src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ course.course_img }}"
+                          ></iframe>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div id="instructor" class="tab-pane fade">
+                      <div class="course-instructor">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="profile-image">
+                              {% if course.user.profile_pic %}
+                                <img
+                                  src="https://res.cloudinary.com/biitech-academy/image/upload/{{ course.user.profile_pic }}"
+                                  alt="profile"
+                                />
+                              {% else %}
+                                  <img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ course.course_img }}" alt="profile"/>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="profile-info">
+                              <h5>
+                                <a href="#">{{ course.course_title }}</a>
+                              </h5>
+                              <div class="author-career">{{ course.user.last_name }}&nbsp;{{ course.user.first_name }}&nbsp;{{ course.user.middle_name }}</div>
+                              <p class="author-bio">{{ course.user.content }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="lp-course-buttons">
+                    {% if current_user.is_authenticated %}
+                      {% if current_user.last_name %}
+                        <!--<form method="POST" action="">
+                          {{ form.hidden_tag() }}
+                          <input type="hidden" name="client_name" value="{{ current_user.last_name }}">
+                          <input type="hidden" name="client_email" value="{{ current_user.email }}">
+                          <input type="hidden" name="price_field" value="{{ course.courses_price }}">
+                          <button class="btn btn-primary btn-hover-secondary">Register Course</button>
+                        </form>-->
+                        <a
+                          class="btn btn-primary btn-hover-secondary"
+                          href="{{ url_for('create_registration', id=course.id) }}"
+                          >Register Course</a
+                        >
+                      {% else %}
+                        <a
+                          class="btn btn-primary btn-hover-secondary"
+                          href="{{ url_for('update', id=current_user.id, email=current_user.email) }}"
+                          >Enroll Now</a
+                        >
+                      {% endif %}
+                    {% else %}
+                      <a
+                        class="btn btn-primary btn-hover-secondary"
+                        href="{{ url_for('add_user') }}"
+                        >Register Course</a
+                      >
+                    {% endif %}
+                  </div>
+                </div>
+                <!-- Course Details Wrapper End -->
+              </div>
+
+              <div class="col-lg-4 col-12 order-lg-2 max-mb-50">
+                <div class="sidebar-widget-wrapper pl-30 pl-md-0 pl-sm-0 pl-xs-0">
+                  <div class="sidebar-widget">
+                    <h3 class="sidebar-widget-title">Recent Courses</h3>
+                    <div class="sidebar-widget-content">
+                      <ul class="sidebar-widget-course">
+                        {% for created_course in created_courses[0:5]  %}
+                          <li class="widget-course">
+                            <div class="thumbnail">
+                              {% if created_course.course_img %}
+                                <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}" class="image"><img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ created_course.course_img }}" alt="Biitech Academy"></a>
+                              {% else %}
+                                <a href="#"
+                                ><img src="https://res.cloudinary.com/biitech-academy/image/upload/v1710895994/biitech-academy/defaultuser_xsw5op_pqmhmg.jpg" alt="Biitech Academy"></a>
+                              {% endif %}
+                              
+                            </div>
+                            <div class="info">
+                              <!--<span class="price">$ {{ created_course.courses_price }}<span>.00</span></span>-->
+                              <h6 class="title">
+                                <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}">{{ created_course.course_title }}</a>
+                              </h6>
+
+                              <div class="desc">
+                                <p>{{ created_course.course_description[0:50] | safe }}...</p>
+                              </div>
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Course Details Section End -->
+      <br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;
+    {% include 'components/footer.html' %}
+  {% endblock %}

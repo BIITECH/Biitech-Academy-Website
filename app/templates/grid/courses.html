@@ -1,0 +1,62 @@
+    <!-- Course Section Start -->
+      <div class="section" data-bg-color="#f5f7fa">
+        <div class="container">
+          {% if 'biitech-academy/user-dashboard' in request.url_rule.rule %}
+            <!-- Section Title Start -->
+            <div class="section-title text-center" data-aos="fade-up">
+              <br />
+              <span class="sub-title">Courses Made For You</span>
+              <h2 class="title">Our Recommended Courses</h2>
+            </div>
+            <!-- Section Title End -->
+          {% else %}
+            <!-- Section Title Start -->
+            <div class="section-title text-center" data-aos="fade-up">
+              <span class="sub-title">Stimulated to learn?</span>
+              <h2 class="title">Explore our Specialized IT Role-Based Courses</h2>
+            </div>
+            <!-- Section Title End -->
+          {% endif %}
+
+          <!-- Course Section Start -->
+            <div class="section section-padding-bottom">
+              <div class="container">
+                <!-- Courses Wrapper Start -->
+                <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 max-mb-n30">
+                  <!-- Course Start -->
+                  {% for created_course in created_courses  %}
+                    <div class="col max-mb-30" data-aos="fade-up">
+                      <div class="course">
+                        <div class="thumbnail">
+                          {% if created_course.course_img %}
+                            <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}" class="image"><img src="https://res.cloudinary.com/biitech-academy-content/image/upload/{{ created_course.course_img }}" alt="Biitech Academy"/></a>
+                          {% endif %}
+                        </div>
+                        <div class="info">
+                          <!--<span class="price">${{ created_course.courses_price }}<span>.00</span></span>-->
+                          <h3 class="title">
+                            <a href="{{ url_for('course', id=created_course.id, title=created_course.course_title) }}"
+                              >{{ created_course.course_title }}</a
+                            >
+                          </h3>
+                          <div class="desc">
+                            <p>{{ created_course.course_description[0:100] | safe }}...</p>
+                          </div>
+                          
+                          <!--<ul class="meta">
+                            <li><i class="fas fa-file-alt"></i>{{ created_course.course_lesson }} Lessons</li>
+                            <li><i class="fas fa-user-alt"></i>{{ created_course.courses_instructor }} Instructor</li>
+                          </ul>-->
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <!-- Course End -->
+                </div>
+                <!-- Courses Wrapper End -->
+              </div>
+            </div>
+          <!-- Course Section End -->
+        </div>
+      </div>
+      <!-- Course Section End -->

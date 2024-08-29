@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+  {% block content %}
+    {% include 'components/navbar.html' %}
+    {% include 'components/notification.html' %}
+
+    	<div class="page-spacing-container">
+				<div class="user-form-grid">
+					<div class="user-form-header">
+						<h2>Create Post</h2>
+						<!--<p>Update your name, email address and other personal details. Keeping this information current helps us provide you with the best possible service.</p>-->
+					</div>
+
+					<form method="POST" enctype="multipart/form-data">
+						{{ form.hidden_tag() }}
+							<div class="user-form-grid-input">
+								<span>Post Title</span>
+								<input type="text" name="title"
+								{% if blog.title %}
+									value="{{ blog.title }}"
+								{% else %}
+									placeholder="Your post title here..." 
+								{% endif %}
+								>
+							</div>
+
+							<div class="user-form-grid-input">
+								<span>Upload Image</span>
+								<input type="file" name="file">
+							</div>
+
+							<div class="user-form-grid-input">
+								<span>Image Alt Text</span>
+								<input type="text" name="alt"
+								{% if blog.alt %}
+									value="{{ blog.alt }}"
+								{% else %}
+									placeholder="Paste Image Alt Here..." 
+								{% endif %}
+								>
+							</div>
+
+							<div class="user-form-grid-input">
+								<span>Post Title Tag</span>
+								<input type="text" name="title_tag"
+								{% if blog.title_tag %}
+									value="{{ blog.title_tag }}"
+								{% else %}
+									placeholder="Your post title_tag here..." 
+								{% endif %}
+								>
+							</div>
+
+							<div class="user-form-grid-input">
+								<span>Post url_link</span>
+								<input type="text" name="url_link"
+								{% if blog.url_link %}
+									value="{{ blog.url_link }}"
+								{% else %}
+									placeholder="Your post url_link here i.e www.biitechacademy/..." 
+								{% endif %}
+								>
+							</div>
+
+							<div class="user-form-grid-input">
+							    <span>Meta Description</span>
+							    <textarea name="meta_description">{% if blog.meta_description %}{{ blog.meta_description }}{% else %}Your post Meta Description Here...{% endif %}</textarea>
+							</div>
+
+							<div class="user-form-grid-input">
+							    <span>Keyword</span>
+							    <textarea name="keyword">{% if blog.keyword %}{{ blog.keyword }}{% else %}Your post Keyword Here...{% endif %}</textarea>
+							</div>
+
+							{{ form.content(class="form-control", rows="10") }}
+							{{ ckeditor.load() }} {{ ckeditor.config(name='content') }}
+
+							<button class="black-general-button-container button" type="submit" name="submit">
+								<span>PUBLISH POST</span>
+								<img class="black-general-button-arrow" src="https://res.cloudinary.com/quinn-daisies/image/upload/v1716568463/Renaissance/Right_Arrow_1_uvdf61.png" alt="Renaissance Website Image">
+							</button>
+					</form>
+				</div>
+			</div>
+{% include 'components/footer.html' %}
+  {% endblock %}

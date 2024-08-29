@@ -1,0 +1,183 @@
+<!-- Header Section Start -->
+      <div class="header-section header-fluid sticky-header section">
+        <div class="header-inner">
+          <div class="container position-relative">
+            <div class="row justify-content-between align-items-center">
+              <!-- Header Logo Start -->
+              <div class="col-xl-3 col-auto">
+                <div class="header-logo">
+                  <a href="{{ url_for('index') }}">
+                    <img
+                      class="dark-logo logo-custom-img"
+                      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716459198/biitech-academy/Untitled_design-removebg-preview_qrpgff.png"
+                      alt="Learts Logo"
+                    />
+                    <img
+                      class="light-logo logo-custom-img"
+                      src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716459198/biitech-academy/Untitled_design-removebg-preview_qrpgff.png"
+                      alt="Learts Logo"
+                    />
+                  </a>
+                </div>
+              </div>
+              <!-- Header Logo End -->
+
+              <!-- Header Main Menu Start -->
+              <div class="col d-none d-xl-block position-static">
+                {% if current_user.user_status == 'Instructor' or current_user.user_status == 'Administrator' or current_user.id == 1 %}
+                  <nav class="site-main-menu">
+                    <ul>
+                      {% if current_user.id == 1 %}
+                        <li class="has-children">
+                          <a href=" {{ url_for('admin') }} "><span class="">Administration</span></a>
+                        </li>
+                      {% endif %}
+                      <li class="has-children">
+                        <a href=" {{ url_for('admin') }} "><span class="">Administration</span></a>
+                      </li>
+
+                      <li class="has-children">
+                        <a href=" {{ url_for('dashboard') }} "><span class="">Dashboard</span></a>
+                      </li>
+
+                      <li class="has-children">
+                        <a href=" {{ url_for ('create_post') }} "><span>Create Post</span></a>
+                      </li>
+
+                      <li class="has-children">
+                        <a href=" {{ url_for ('logout') }} "><span>Logout</span></a>
+                      </li>
+                    </ul>
+                  </nav>
+                {% else %}
+                  <nav class="site-main-menu">
+                    <ul>
+                      {% if current_user.user_status == 'Instructor' or current_user.user_status == 'Administrator' or current_user.id == 1 %}
+                        <li class="has-children">
+                          <a href=" {{ url_for ('create_tasks') }} "><span>Create Task</span></a>
+                        </li>
+
+                        <li class="has-children">
+                          <a href=" {{ url_for ('create_events') }} "><span>Create Event</span></a>
+                        </li>
+                      {% else %}
+                        <li class="has-children position-static">
+                          <a href=" {{ url_for ('index') }} "><span class="">Home</span></a>
+                        </li>
+
+                        <li class="has-children">
+                          <a href=" {{ url_for('about') }} "><span class="">About us</span></a>
+                        </li>
+
+                        <li class="has-children">
+                          <a href="{{ url_for('courses') }}"><span class="">Courses</span></a>
+                        </li>
+
+                        <li class="has-children">
+                          <a href="{{ url_for('career_services') }}"><span class="">Career Services</span></a>
+                        </li>
+
+                        <li class="has-children">
+                          <a href="{{ url_for('programs') }}"><span class="">Our Programs</span></a>
+                        </li>
+
+                        {% if current_user.is_authenticated %}
+                          <li class="has-children">
+                            <a href=" {{ url_for('dashboard') }} "><span class="">Dashboard</span></a>
+                          </li>
+
+                          <li class="has-children">
+                            <a href=" {{ url_for ('logout') }} "><span>Logout</span></a>
+                          </li>
+                        {% else %}
+                          <!--<li class="has-children">
+                            <a href="{{ url_for('login') }}"><span class="">Login</span></a>
+                          </li>-->
+
+                          <li class="has-children">
+                            <a href=" {{ url_for('add_user') }} "><span class="">Enroll now</span></a>
+                          </li>
+                        {% endif %}
+                      {% endif %}
+                    </ul>
+                  </nav>
+                {% endif %}
+              </div>
+              <!-- Header Main Menu End -->
+
+              <!-- Header Right Start -->
+              <div class="col-xl-3 col-auto displaying-navbar-content">
+                <div class="header-right">
+                  <div class="inner">
+                    <!-- Header Mobile Menu Toggle Start -->
+                    <div class="header-mobile-menu-toggle d-xl-none ml-sm-2">
+                      <button class="toggle">
+                        <i class="icon-top"></i>
+                        <i class="icon-middle"></i>
+                        <i class="icon-bottom"></i>
+                      </button>
+                    </div>
+                    <!-- Header Mobile Menu Toggle End -->
+                  </div>
+                </div>
+              </div>
+              <!-- Header Right End -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Section End -->
+      <div id="site-main-mobile-menu" class="site-main-mobile-menu">
+        <div class="site-main-mobile-menu-inner">
+          <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+              <a href="{{ url_for('index') }}"><img src="https://res.cloudinary.com/biitech-academy-content/image/upload/v1716459198/biitech-academy/Untitled_design-removebg-preview_qrpgff.png" alt=""/></a>
+            </div>
+
+            <div class="mobile-menu-close">
+              <button class="toggle">
+                <i class="icon-top"></i>
+                <i class="icon-bottom"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mobile-menu-content">
+            <nav class="site-mobile-menu">
+              <ul>
+                {% if current_user.user_status == 'Instructor' or current_user.user_status == 'Administrator' or current_user.id == 1 %}
+                  {% if current_user.id == 1 %}
+                    <li class="has-children"><a href="{{ url_for('create_tasks') }}"><span class="menu-text">Administrator</span></a></li>
+                  {% endif %}
+                  <li class="has-children"><a href="{{ url_for('dashboard') }}"><span class="menu-text">Dashboard</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('dashboard_courses') }}"><span class="menu-text">Courses Registration</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('create_events') }}"><span class="menu-text">Create Event</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('create_tasks') }}"><span class="menu-text">Create Task</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('logout') }}"><span class="menu-text">Logout</span></a></li>
+                {% else %}
+                  <li class="has-children"><a href="{{ url_for('index') }}"><span class="menu-text">Home</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('about') }}"><span class="menu-text">About Us</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('courses') }}"><span class="menu-text">Courses</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('career_services') }}"><span class="menu-text">Career Services</span></a></li>
+                  <li class="has-children"><a href="{{ url_for('programs') }}"><span class="menu-text">Our Programs</span></a></li>
+                {% endif %}
+
+                <li class="has-children">
+                  <a href="#"><span class="menu-text">Accounts</span></a>
+                  <span class="menu-toggle"><i class="fas fa-angle-down"></i></span>
+                  <ul class="sub-menu">
+                    {% if current_user.is_authenticated %}
+                      <li><a href="{{ url_for('dashboard') }}"><span class="menu-text">Dashboard</span></a></li>
+                      <li><a href="{{ url_for('logout') }}"><span class="menu-text">Logout</span></a></li>
+                    {% else %}
+                      <li><a href="{{ url_for('login') }}"><span class="menu-text">Login Account</span></a></li>
+                      <li><a href="{{ url_for('add_user') }}"><span class="menu-text">Enroll Here</span></a></li>
+                    {% endif %}
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>

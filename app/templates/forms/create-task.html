@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show popup-notification" role="alert">
+  <div class="notification-header">
+    <div class="notification-header-img">
+      <img
+        src="https://res.cloudinary.com/quinn-daisies-platform/image/upload/v1711065684/Quinn_Daisies_Blog/bell_ktw9xf_scrpqe.png"
+        alt="Quinn Daisies Blog">
+    </div>
+
+    <div type="button" class="btn-close notification-btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
+  </div>
+
+  <div class="notification-message">
+    <h1>Notification</h1>
+    <div class="notification-text">{{ message }}</div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="screen">
+	{% include 'dashboard/sidebar.html' %}
+
+	<div class="form-container">
+		<form method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			<div class="form-header">
+				<h2>Task Creation</h2>
+				<p>Provide students with assessments and assignments.</p>
+			</div>
+			<div class="form-container-size">
+				<span>Task Title</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">add_task</span>
+					<input type="text" name="task_title" placeholder="Type in a suitable title here...">
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Select Targeted Course</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">library_books</span>
+					{% for created_course in created_courses %}
+						<select name="user_status" id="user_status">
+							<option value="{{ created_course.id }}">{{ created_course.course_title }}</option>
+						</select>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Task Priority</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">priority</span>
+					<select name="task_priority" id="task_priority">
+						<option value="High Priority">High Priority</option>
+						<option value="Medium Priority">Medium Priority</option>
+						<option value="Low Priority">Low Priority</option>
+					</select>
+				</div>
+			</div>
+
+			{{ form.task_description(class="form-control", rows="10") }}
+
+			<div class="form-container-size">
+				<span>Task Submission URL</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">link</span>
+					<input type="text" name="task_submission_url" placeholder="Type in a suitable title here...">
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Task Status</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">task_alt</span>
+					<select name="task_status" id="task_status">
+						<option value="Pending">Pending</option>
+						<option value="Started">Started</option>
+						<option value="Completed">Completed</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Task Deadline</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">done_all</span>
+					<input type="date" name="task_deadline" placeholder="Paste in your event URL">
+				</div>
+			</div>
+
+			<button type="submit" name="submit"> 
+				<span>Create Task</span>&nbsp;&nbsp;
+				<span class="material-symbols-outlined">join_inner</span>
+			</button>
+		</form>
+		{{ ckeditor.load() }} {{ ckeditor.config(name='event_description') }}
+	</div>
+
+	<div class="main-dashboard">
+		<div class="top-div">
+			<div class="classes">
+				<h2>My Course Slot</h2>
+				<p>Register for your course here.</p>
+				<div class="frequents">
+					{% set user_registered_courses = [] %}
+						{% for created_course in created_courses %}
+							{% for registration in created_course.course_foreignkey %}
+								{% if current_user.id == registration.user_id %}
+									{% set user_registered_courses = user_registered_courses.append(created_course) %}
+
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+
+						{% if user_registered_courses %}
+							{% for created_course in user_registered_courses %}
+								<div class="frequent">
+									<div class="course-content">
+										<h3>{{ created_course.course_title }}</h3>
+										<p>{{ created_course.course_description[:100] | safe }}</p>
+									</div>
+
+									<a href=""><span class="material-symbols-outlined">verified_user</span></a>
+								</div>
+							{% endfor %}
+						{% else %}
+							{% for created_course in created_courses %}
+								<div class="frequent">
+									<div class="course-content">
+										<h3>{{ created_course.course_title }}</h3>
+										<p>{{ created_course.course_description[:100] | safe }}</p>
+									</div>
+
+									<a href="{{ url_for('create_registration', id=created_course.id) }}"><span class="material-symbols-outlined">add_circle</span></a>
+								</div>
+						{% endfor %}
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

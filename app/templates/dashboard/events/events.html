@@ -1,0 +1,29 @@
+<div class="events">
+				
+				<h2>Academic Events</h2>
+				<p>Get updates on academic events and the academic calender.</p>
+
+				<div class="events-list">
+					{% for event in events %}
+						<div class="events-list-box">
+							<div class="events-list-box-content">
+								<h3>{{ event.event_name }}</h3>
+								<p>{{ event.event_description[:100] | safe }}</p>
+							</div>
+
+							<div class="details-hub-container">
+								<div class="details-hub">
+									<span>{{ event.event_time }}</span>
+									<span class="material-symbols-outlined">schedule</span>
+								</div>
+
+								<div class="details-hub">
+									<span>{{ event.event_date }}</span>
+									<span class="material-symbols-outlined">calendar_month</span>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>

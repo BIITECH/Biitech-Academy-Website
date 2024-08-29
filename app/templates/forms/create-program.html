@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show popup-notification" role="alert">
+  <div class="notification-header">
+    <div class="notification-header-img">
+      <img
+        src="https://res.cloudinary.com/quinn-daisies-platform/image/upload/v1711065684/Quinn_Daisies_Blog/bell_ktw9xf_scrpqe.png"
+        alt="Quinn Daisies Blog">
+    </div>
+
+    <div type="button" class="btn-close notification-btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
+  </div>
+
+  <div class="notification-message">
+    <h1>Notification</h1>
+    <div class="notification-text">{{ message }}</div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="screen">
+	{% include 'dashboard-sidebar.html' %}
+	<div class="main-dashboard">
+		<form class="update-frame" action="/biitech-academy/update-user-information/{{ name_to_update.id }}"
+			method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+
+			<div class="form-content-container-text">
+				<h3>Update User Information</h3>
+				<p>Please review the informations in the input box, make sure they are conrrect and up to date, this
+					would be displayed on your profile and subsequent certifications from Biitech Academy.</p>
+			</div>
+
+			<div class="form-flex-side-bar">
+				<div class="form-input">
+					<div class="form-input-grid">
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">account_circle</span>
+							<input type="text" name="last_name" value="{{ name_to_update.last_name }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">account_circle</span>
+							<input type="text" name="first_name" value="{{ name_to_update.first_name }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">account_circle</span>
+							<input type="text" name="middle_name" value="{{ name_to_update.middle_name }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">alternate_email</span>
+							<input type="text" name="email" value="{{ name_to_update.email }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">location_on</span>
+							<input type="text" name="address" value="{{ name_to_update.address }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">language</span>
+							<input type="text" name="country" value="{{ name_to_update.country }}">
+						</div>
+
+						<div class="form-user-box">
+							<span class="material-symbols-outlined">contact_support</span>
+							<input type="text" name="contact" value="{{ name_to_update.contact }}">
+						</div>
+					</div>
+
+					<div class="form-content-container">
+						{{ form.content(class="form-control", rows="10") }}
+
+						<div class="update-frame-content">
+							<div class="update-frame-content-img">
+								{% if current_user.profile_pic %}
+									<img src="https://res.cloudinary.com/biitech-academy/image/upload/{{ current_user.profile_pic }}" alt="Biitech Academy">
+								{% else %}
+									<img src="https://res.cloudinary.com/biitech-academy/image/upload/v1710895994/biitech-academy/defaultuser_xsw5op_pqmhmg.jpg" alt="Biitech Academy">
+								{% endif %}
+							</div>
+
+							<div class="profile-user-information">
+								<h3>{{ current_user.last_name }} {{ current_user.first_name }} {{
+									current_user.middle_name }}</h3>
+								<p> {{ current_user.email }} </p>
+
+								<div>
+									<input type="file" name="profile_pic" placeholder="Update Image">
+									<p>Upload Image</p>
+								</div>								
+								<div class="form-user-box">
+							        <span class="material-symbols-outlined">detector_status</span>
+							        <select type="text" name="user_status">
+							            <option value="{{ name_to_update.user_status }}"><p>{{ name_to_update.user_status }}</p></option>
+							            <option value="admin"><p>Administrator</p></option>
+							            <option value="instructor"><p>Instructor</p></option>
+							            <option value="student"><p>Student</p></option>
+							        </select>
+							    </div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-input-grid">
+						<div class="form-user-box">
+							<i class='bx bxl-facebook-circle'></i>
+							<input type="text" name="facebook_account" value="{{ name_to_update.facebook_account }}">
+						</div>
+
+						<div class="form-user-box">
+							<i class='bx bxl-twitter'></i>
+							<input type="text" name="twitter_account" value="{{ name_to_update.twitter_account }}">
+						</div>
+
+						<div class="form-user-box">
+							<i class='bx bxl-instagram'></i>
+							<input type="text" name="instagram_account" value="{{ name_to_update.instagram_account }}">
+						</div>
+
+						<div class="form-user-box">
+							<i class='bx bxl-linkedin-square'></i>
+							<input type="text" name="linkedin_account" value="{{ name_to_update.linkedin_account }}">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" name="submit">
+				<span>Update user information</span>
+				<span class="material-symbols-outlined">chevron_right</span>
+			</button>
+
+		</form>
+		{{ ckeditor.load() }} {{ ckeditor.config(name='content') }}
+	</div>
+</div>
+{% endblock %}

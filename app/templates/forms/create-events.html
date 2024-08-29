@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show popup-notification" role="alert">
+  <div class="notification-header">
+    <div class="notification-header-img">
+      <img
+        src="https://res.cloudinary.com/quinn-daisies-platform/image/upload/v1711065684/Quinn_Daisies_Blog/bell_ktw9xf_scrpqe.png"
+        alt="Quinn Daisies Blog">
+    </div>
+
+    <div type="button" class="btn-close notification-btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
+  </div>
+
+  <div class="notification-message">
+    <h1>Notification</h1>
+    <div class="notification-text">{{ message }}</div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="screen">
+	{% include 'dashboard/sidebar.html' %}
+
+	<div class="form-container">
+		<form method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			<div class="form-header">
+				<h2>Create Events</h2>
+				<p>Create upcoming events for registered students to look forward to.</p>
+			</div>
+			<div class="form-container-size">
+				<span>Event Name</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">calendar_month</span>
+					<input type="text" name="event_name" placeholder="Type in your event name here...">
+				</div>
+			</div>
+
+			{{ form.event_description(class="form-control", rows="10") }}
+
+			<div class="form-container-size">
+				<span>Event Location</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">explore</span>
+					<input type="text" name="event_location" placeholder="Type in your event name here...">
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Event Link</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">add_link</span>
+					<input type="text" name="event_url" placeholder="Paste in your event URL">
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Event Time</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">schedule</span>
+					<input type="time" name="event_time" placeholder="What time does the event starts...">
+				</div>
+			</div>
+
+			<div class="form-container-size">
+				<span>Event Date</span>
+				<div class="form-container-flex">
+					<span class="material-symbols-outlined">calendar_clock</span>
+					<input type="date" name="event_date" placeholder="Whats the date...">
+				</div>
+			</div>
+
+			<button type="submit" name="submit"> 
+				<span>Create Events</span>&nbsp;&nbsp;<span class="material-symbols-outlined">join_inner</span>
+			</button>
+		</form>
+		{{ ckeditor.load() }} {{ ckeditor.config(name='event_description') }}
+	</div>
+
+	<div class="main-dashboard">
+		<div class="top-div">
+			<div class="classes">
+				<h2>My Course Slot</h2>
+				<p>Register for your course here.</p>
+				<div class="frequents">
+					{% set user_registered_courses = [] %}
+						{% for created_course in created_courses %}
+							{% for registration in created_course.course_foreignkey %}
+								{% if current_user.id == registration.user_id %}
+									{% set user_registered_courses = user_registered_courses.append(created_course) %}
+
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+
+						{% if user_registered_courses %}
+							{% for created_course in user_registered_courses %}
+								<div class="frequent">
+									<div class="course-content">
+										<h3>{{ created_course.course_title }}</h3>
+										<p>{{ created_course.course_description[:100] | safe }}</p>
+									</div>
+
+									<a href=""><span class="material-symbols-outlined">verified_user</span></a>
+								</div>
+							{% endfor %}
+						{% else %}
+							{% for created_course in created_courses %}
+								<div class="frequent">
+									<div class="course-content">
+										<h3>{{ created_course.course_title }}</h3>
+										<p>{{ created_course.course_description[:100] | safe }}</p>
+									</div>
+
+									<a href="{{ url_for('create_registration', id=created_course.id) }}"><span class="material-symbols-outlined">add_circle</span></a>
+								</div>
+						{% endfor %}
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}
